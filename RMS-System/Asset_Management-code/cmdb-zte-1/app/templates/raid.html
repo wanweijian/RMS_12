@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block css %}
+  <!-- DataTables -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/dataTables.bootstrap4.css') }}">
+{% endblock %}
+
+
+{% block title %}资产管理{% endblock %}
+
+{% block navbar %}
+<section class="content-header">
+    <h1>磁阵</h1>
+        <div class="btn-group" style="position:relative;right:8px;top:15px">
+            <a href="{{ url_for('main.addRaid') }}" class="btn">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button>
+             </a>
+            <a href="{{ url_for('main.batchadd') }}" class="btn">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-upload" aria-hidden="true"></i></button>
+             </a>
+            <a href="{{ url_for('main.Raiddownload') }}" class="btn">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-download" aria-hidden="true"></i></button>
+             </a>
+            <a href="{{ url_for('main.update') }}" class="btn">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+             </a>
+        </div>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li><i class="fa fa-dashboard"></i> 资产管理</li>
+        <li class="active">磁阵</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<!--&lt;!&ndash; Content Wrapper. Contains page content &ndash;&gt;-->
+<!--  <div class="content-wrapper">-->
+<!--    &lt;!&ndash; Main content &ndash;&gt;-->
+<!--    <section class="content">-->
+<!--      <div class="row">-->
+<!--          <div class="card">-->
+<!--            &lt;!&ndash; /.card-header &ndash;&gt;-->
+<!--            <div class="card-body">-->
+<!--              <table id="example1" class="table table-bordered table-hover">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>IP地址</th>-->
+<!--                    <th>资产编号</th>-->
+<!--                    <th>设备型号</th>-->
+<!--                    <th>运行状态</th>-->
+<!--                    <th>上电时间</th>-->
+<!--                    <th>使用率</th>-->
+<!--                    <th>位置</th>-->
+<!--                    <th>持有人</th>-->
+<!--                    <th>编辑</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                {% for raid in raidmodels %}-->
+<!--                <tr>-->
+<!--                    <td>{{raid.IP}}</td>-->
+<!--                    <td>{{raid.AssertNum}}</td>-->
+<!--                    <td>{{raid.MODEL}}</td>-->
+<!--                    <td>{{raid.STATUS}}</td>-->
+<!--                    <td>{{raid.UPTIME}}</td>-->
+<!--                    <td>{{raid.USEDPERCENT}}</td>-->
+<!--                    <td>{{raid.POSITION}}</td>-->
+<!--                    <td>{{raid.OWNER}}</td>-->
+<!--                    <td><a href='{{ url_for("main.modifyRaid", id=raid.ID) }}'>-->
+<!--                        <i class="fa fa-edit" aria-hidden="true"></i>-->
+<!--                    </a>-->
+<!--                        |-->
+<!--                    <a href='{{ url_for("main.deleteRaid", id=raid.ID) }}' data-target="#confirm-delete">-->
+<!--                        <i class="fa fa-trash" aria-hidden="true"></i>-->
+<!--                    </a></td>-->
+<!--                </tr>-->
+<!--                {% endfor %}-->
+<!--                </tbody>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /.card-body &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /.card &ndash;&gt;-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.row &ndash;&gt;-->
+<!--    </section>-->
+<!--    &lt;!&ndash; /.content &ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /.content-wrapper &ndash;&gt;-->
+
+<div class="box box-primary">
+    <div class="box-body">
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>IP地址</th>
+                            <th>资产编号</th>
+                            <th>设备型号</th>
+                            <th>运行状态</th>
+                            <th>上电时间</th>
+                            <th>使用率(%)</th>
+                            <th>位置</th>
+                            <th>持有人</th>
+                            <th>编辑</th>
+                        </tr>
+                        </thead>
+                        {% for raid in raidmodels %}
+                        <tr>
+                            <td>{{raid.IP}}</td>
+                            <td>{{raid.AssertNum}}</td>
+                            <td>{{raid.MODEL}}</td>
+                            <td>{{raid.STATUS}}</td>
+                            <td>{{raid.UPTIME}}</td>
+                            <td>{{raid.USEDPERCENT}}</td>
+                            <td>{{raid.POSITION}}</td>
+                            <td>{{raid.OWNER}}</td>
+                            <td><a href='{{ url_for("main.modifyRaid", id=raid.ID) }}'>
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+                                |
+                            <a href='{{ url_for("main.deleteRaid", id=raid.ID) }}' data-target="#confirm-delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='plugins/jQuery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ url_for('static', filename='plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ url_for('static', filename='plugins/fastclick/fastclick.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,291 @@
+
+
+
+
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block navbar %}
+<section class="content-header">
+    <h1>首页</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active">首页</li>
+    </ol>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+    <div class="box-footer">
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-info"></i> 温馨提示</h4>
+            <ol>
+                <li>操作需谨慎</li>
+                <li>刷新需要时间，请耐心等待</li>
+            </ol>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3 id="count01">{{ raid_on_count }}/{{ raid_all_count }}</h3>
+                        <p>磁阵</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3 id="count02">{{ server_on_count }}/{{ server_all_count }}</h3>
+                        <p>服务器</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3 id="count03">{{ switch_on_count }}/{{ switch_all_count }}</h3>
+                        <p>交换机</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3 id="count04">{{ raid_used }}%</h3>
+                        <p>磁阵使用率</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="time" style="width: 600px;height:400px;"></div>
+        <div id="usedpercent" style="width: 600px;height:400px;"></div>
+    </div>
+</div>
+
+<body>
+
+</body>
+{% endblock %}
+
+
+{% block scripts %}
+<!--<script>-->
+<!--    function initPage() {-->
+<!--        var jsInObj = null;-->
+<!--        restTemplate("GET", "/stats/summary", jsInObj, function (jsOutObj) {-->
+<!--            $("#count01").text(jsOutObj.batch_count);-->
+<!--            $("#count02").text(jsOutObj.test_count);-->
+<!--            $("#count03").text(jsOutObj.succ_count);-->
+<!--            $("#count04").text(jsOutObj.fail_count);-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+
+        <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('time'));
+<!--        var option = {-->
+<!--            backgroundColor: '#18163B',-->
+<!--            grid: {-->
+<!--                top: '15%',-->
+<!--                right: '3%',-->
+<!--                left: '5%',-->
+<!--                bottom: '12%'-->
+<!--            },-->
+<!--            xAxis: [{-->
+<!--                type: 'category',-->
+<!--                color: '#59588D',-->
+<!--                data: ['磁阵', '服务器', '交换机'],-->
+<!--                axisPointer: {-->
+<!--                    type: 'line'-->
+<!--                },-->
+<!--                axisLine: {-->
+<!--                    lineStyle: {-->
+<!--                        color: '#272456'-->
+<!--                    }-->
+<!--                },-->
+<!--                axisLabel: {-->
+<!--                    margin: 20,-->
+<!--                    color: '#59588D',-->
+<!--                    textStyle: {-->
+<!--                        fontSize: 12-->
+<!--                    },-->
+<!--                },-->
+<!--            }],-->
+<!--            yAxis: [{-->
+<!--                min: 0,-->
+<!--                max: 100,-->
+<!--                axisLabel: {-->
+<!--                    formatter: '{value}',-->
+<!--                    color: '#59588D',-->
+<!--                },-->
+<!--                axisLine: {-->
+<!--                    show: false-->
+<!--                },-->
+<!--                splitLine: {-->
+<!--                    lineStyle: {-->
+<!--                        color: '#272456'-->
+<!--                    }-->
+<!--                }-->
+<!--            }],-->
+<!--            series: [{-->
+<!--                type: 'bar',-->
+<!--                data: [{{ raid_time }}, {{ server_time }}, {{ switch_time }}],-->
+<!--                barWidth: '20px',-->
+<!--                itemStyle: {-->
+<!--                    normal: {-->
+<!--                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{-->
+<!--                            offset: 0,-->
+<!--                            color: '#41E1D4' // 0% 处的颜色-->
+<!--                        }, {-->
+<!--                            offset: 1,-->
+<!--                            color: '#10A7DB' // 100% 处的颜色-->
+<!--                        }], false),-->
+<!--                        barBorderRadius: [30, 30, 0, 0],-->
+<!--                        shadowColor: 'rgba(0,255,225,1)',-->
+<!--                        shadowBlur: 4,-->
+<!--                    }-->
+<!--                },-->
+<!--                label: {-->
+<!--                    normal: {-->
+<!--                        show: true,-->
+<!--                        lineHeight: 30,-->
+<!--                        width: 80,-->
+<!--                        height: 30,-->
+<!--                        backgroundColor: '#252453',-->
+<!--                        borderRadius: 200,-->
+<!--                        position: ['-8', '-60'],-->
+<!--                        distance: 1,-->
+<!--                        formatter: [-->
+<!--                            '    {d|●}',-->
+<!--                            ' {a|{c}}     \n',-->
+<!--                            '    {b|}'-->
+<!--                        ].join(','),-->
+<!--                        rich: {-->
+<!--                            d: {-->
+<!--                                color: '#3CDDCF',-->
+<!--                            },-->
+<!--                            a: {-->
+<!--                                color: '#fff',-->
+<!--                                align: 'center',-->
+<!--                            },-->
+<!--                            b: {-->
+<!--                                width: 1,-->
+<!--                                height: 30,-->
+<!--                                borderWidth: 1,-->
+<!--                                borderColor: '#234e6c',-->
+<!--                                align: 'left'-->
+<!--                            },-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+<!--            }]-->
+<!--        };-->
+option = {
+    title: {
+        text: '上电时间统计',
+        bottom: -5,
+        left: 'center',
+        textStyle: {
+            fontSize: 16
+        }
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    grid: {
+        left: '2%',
+        right: '4%',
+        bottom: '10%',
+        containLabel: true
+    },
+    xAxis: [{
+        type: 'category',
+        axisTick: {
+            show: false,
+            color: '#707070'
+        },
+        axisLabel: {
+            textStyle: {
+                fontSize: 14,
+                color: '#4D4D4D'
+            }
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#707070'
+            }
+        },
+        data: ['磁阵', '服务器', '交换机'],
+    }],
+    yAxis: {
+        type: 'value',
+        name: 'abc上电时间（h）',
+        nameTextStyle: {
+            fontSize: 14,
+            color: '#4D4D4D'
+        },
+        axisLabel: {
+            textStyle: {
+                fontSize: 12,
+                color: '#4D4D4D'
+            }
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#707070'
+            }
+        }
+    },
+    series: [{
+        name: '上电时间',
+        type: 'bar',
+        barWidth: '30%',
+        data: [{
+                name: '磁阵',
+                value: '{{ raid_time }}',
+                itemStyle: {
+                    color: '#A6CEE3'
+                }
+            },
+            {
+                name: '服务器',
+                value: '{{ server_time }}',
+                itemStyle: {
+                    color: '#B2DF8A'
+                }
+            },
+            {
+                name: '交换机',
+                value: '{{ switch_time }}',
+                itemStyle: {
+                    color: '#33A02C'
+                }
+            }
+        ]
+    }]
+};
+        myChart.setOption(option);
+    </script>
+{% endblock %}

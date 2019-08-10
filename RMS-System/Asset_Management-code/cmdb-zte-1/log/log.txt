@@ -1,0 +1,8 @@
+2019-07-23 19:01:08,092  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 19:01:08,092  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 19:10:55,493  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 19:10:55,493  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 19:11:44,648  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 19:11:44,648  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 20:48:43,990  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146
+2019-07-23 20:48:43,990  cmdb-zte-1.app.main  INFO  manager 添加服务器: 10.43.166.146

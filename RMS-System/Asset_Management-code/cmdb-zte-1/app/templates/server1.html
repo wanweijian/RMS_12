@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+
+{% block title %}资产管理{% endblock %}
+
+{% block navbar %}
+<section class="content-header">
+    <h1>服务器</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li><i class="fa fa-dashboard"></i> 资产管理</li>
+        <li class="active">服务器</li>
+    </ol>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+    <div class="box-body">
+            <div class="card">
+                <form action="{{ url_for('main.upload') }}" id="form1" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file"/>
+                    <br>
+                    <input type="submit" value="批量导入"/>
+                 </form>
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.js"></script>
+<script src="../../plugins/datatables/dataTables.bootstrap4.js"></script>
+<!-- FastClick -->
+<script src="../../plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  function saveReport() { 
+  // jquery 表单提交 
+      $("#showDataForm").ajaxSubmit(function(message) { 
+  // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容 
+    }); 
+    return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转   } 
+</script>
+{% endblock %}

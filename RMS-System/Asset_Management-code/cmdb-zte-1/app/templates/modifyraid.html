@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+
+{% block title %}资产管理{% endblock %}
+
+{% block navbar %}
+<section class="content-header">
+    <h1>磁阵</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li><i class="fa fa-dashboard"></i> 资产管理</li>
+        <li><i class="fa fa-dashboard"></i> 磁阵</li>
+        <li class="active">修改磁阵</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="box-header with-border">
+            {% include 'message.html' %}
+        </div>
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">修改磁阵</h3>
+              </div>
+              <!-- /.card-header -->
+
+                <form method="post">
+                    {{ form.hidden_tag() }}
+                     {{ form.csrf_token }}
+                    <p>
+                        {{ form.owner.label }}<br>
+                        {{ form.owner(size=32) }}<br>
+                        {% for error in form.owner.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.ip.label }}<br>
+                        {{ form.ip(size=32) }}<br>
+                        {% for error in form.ip.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.assertnum.label }}<br>
+                        {{ form.assertnum(size=32) }}<br>
+                        {% for error in form.assertnum.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        &nbsp;&nbsp;&nbsp;
+                        {{ form.position1.label }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ form.position2.label }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ form.position3.label }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ form.position4.label }}<br>
+                        {{ form.position1(size=1) }}
+                        &nbsp;
+                        {{ form.position2(size=1) }}
+                        &nbsp;
+                        {{ form.position3(size=1) }}
+                        &nbsp;
+                        {{ form.position4(size=1) }}<br>
+                    </p>
+                    <p>
+                        {{ form.model.label }}<br>
+                        {{ form.model(size=1) }}<br>
+                    </p>
+                    <p>{{ form.buttonraid }}</p>
+                </form>
+
+
+            <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+          </div>
+        </div>
+      </div>
+          <!-- /.row -->
+    </section>
+{% endblock %}
+
+
+{% block scripts %}
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="../../plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+{% endblock %}
